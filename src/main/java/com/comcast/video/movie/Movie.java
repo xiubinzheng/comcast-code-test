@@ -74,4 +74,7 @@ public interface Movie {
      */
     
     Object getField(Field field);
+
+	int compareTo(MovieImpl otherMovie, Field field);
+
 }

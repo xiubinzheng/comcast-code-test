@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.comcast.util.Utility;
@@ -189,13 +190,10 @@ public class MediaManagerImpl implements MediaManager {
 	 */
 	public List<Movie> sortMovies(Field field, boolean ascending) {
 		// TODO Auto-generated method stub
-
 		List<Movie> result = new ArrayList<Movie>();
-		for (int i = 0; i < movieList.size(); i++) {
-			movieList.get(i).getField(field);
-		}
+		Collections.sort(movieList,Collections.reverseOrder());
 
-		return result;
+		return movieList;
 	}
 
 	/**
@@ -237,6 +235,8 @@ public class MediaManagerImpl implements MediaManager {
 	 */
 	public List<Movie> filterMovies(Field field, Operator op, String query) {
 		// TODO Auto-generated method stub
+		List<Movie> result = new ArrayList<Movie>();
+
 		switch (field) {
 		case TITLE:
 

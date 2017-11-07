@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.comcast.video.media.MediaException;
 import com.comcast.video.media.MediaManagerImpl;
+import com.comcast.video.movie.Field;
 import com.comcast.video.movie.MediaType;
 import com.comcast.video.movie.Movie;
 import com.comcast.video.movie.MovieImpl;
@@ -48,8 +49,18 @@ public class TesterMain {
 			
 			for(Movie m:managerImpl.searchMovies("Rock")){
 				System.out.println("mm: "+m.toString());
-				
 			}
+			
+
+			for (Movie m : managerImpl.getMovies()) {
+				System.out.println("Movie: " + m.toString());
+			}
+			
+			System.out.println("-----------------");
+			managerImpl.sortMovies(Field.TITLE, true);
+			
+			
+			
 			
 			for (Movie m : managerImpl.getMovies()) {
 				System.out.println("Movie: " + m.toString());

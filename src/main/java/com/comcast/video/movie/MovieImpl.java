@@ -2,7 +2,7 @@ package com.comcast.video.movie;
 
 import java.util.Arrays;
 
-public class MovieImpl implements Movie {
+public class MovieImpl implements Movie, Comparable<MovieImpl> {
 	private String title;
 	private String description;
 	private String[] actors;
@@ -61,10 +61,32 @@ public class MovieImpl implements Movie {
 
 	@Override
 	public String toString() {
-			return this.title+" | "+this.description+
-					" | "+Arrays.toString(this.actors)+
-					" | "+this.year+" | "
-					+this.rating+" | "+this.mediaType;
+		return this.title + " | " + this.description + " | " + Arrays.toString(this.actors) + " | " + this.year + " | "
+				+ this.rating + " | " + this.mediaType;
 	}
+
+	@Override
+	public int compareTo(MovieImpl otherMovie,Field field) {
+		// TODO Auto-generated method stub
+		switch (field) {
+		case TITLE:
+			return this.getTitle().compareTo(otherMovie.getTitle());
+
+		case DESCRIPTION:
+			return this.getDescription().compareTo(otherMovie.getDescription());
+
+		case YEAR:
+			return String.valueOf(this.getYear()).compareTo(String.valueOf(otherMovie.getYear()));
+
+		case RATING:
+			return this.getRating().toString().compareTo(otherMovie.getRating().toString());
+
+		case MEDIA:
+			return this.getMedia().toString().compareTo(otherMovie.getMedia().toString());
+		default: return 0;
+		}	
+	}
+
+	
 
 }
