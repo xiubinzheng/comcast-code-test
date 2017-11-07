@@ -11,6 +11,7 @@
 package com.comcast.video.media;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.List;
@@ -48,8 +49,9 @@ public interface MediaManager {
      * @param   file  the file to read from
      *
      * @throws  MediaException  if there was any problem reading or parsing the given file
+     * @throws IOException 
      */
-    void addMovies( File file ) throws MediaException;
+    void addMovies( File file ) throws MediaException, IOException;
 
     /**
      * Parse the <code>file</code> adding each movie to the internal database. 

@@ -41,6 +41,7 @@ public class TesterMain {
 			List<Movie> myMovieList = new ArrayList<Movie>(Arrays.asList(TheGoonies, ForrestGump, AmericanPsycho));
 			managerImpl.addMovies(myMovieList);
 
+			
 			managerImpl.addMovies(RockyII, RockyIII);
 			managerImpl.addMovies(input);
 

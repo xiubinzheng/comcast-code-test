@@ -72,40 +72,41 @@ public class MediaManagerImpl implements MediaManager {
 	 */
 	public void addMovies(File file) throws MediaException {
 		// TODO Auto-generated method stub
-		try{
-		FileReader fr =  new FileReader(file);
-		
-		BufferedReader br  = new BufferedReader(fr);
+		FileReader fr;
+		BufferedReader br;
+		try {
+			fr = new FileReader(file);
+			br = new BufferedReader(fr);
 
-		String s = null;
+			String s = null;
 
-		while ((s = br.readLine()) != null) {
-		    // Do whatever u want to do with the content of the file,eg print it on console using SysOut...etc
-			System.out.println("sss: "+s);
-			String[] temp = s.split("\\|");
-			String title = temp[0].trim();
-			String description = temp[1].trim();
-			String[] actors = temp[2].split(",");
-			String year = temp[3].trim();
-			String rating = temp[4].trim();
-			String mediaType = temp[5].trim();
+			while ((s = br.readLine()) != null) {
+				// Do whatever u want to do with the content of the file,eg
+				// print it on console using SysOut...etc
+				System.out.println("sss: " + s);
+				String[] temp = s.split("\\|");
+				String title = temp[0].trim();
+				String description = temp[1].trim();
+				String[] actors = temp[2].split(",");
+				String year = temp[3].trim();
+				String rating = temp[4].trim();
+				String mediaType = temp[5].trim();
 
-			MovieImpl movieImpl = new MovieImpl(title, description, actors, Short.parseShort(year),
-					Utility.getRating(rating), Utility.getMediaType(mediaType));
+				MovieImpl movieImpl = new MovieImpl(title, description, actors, Short.parseShort(year),
+						Utility.getRating(rating), Utility.getMediaType(mediaType));
 
-			movieList.add(movieImpl);
+				movieList.add(movieImpl);
+
+			}
+			br.close();
 			
-			
-		}
-		
-		
-		}catch(FileNotFoundException e){
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	
 
 	}
 
@@ -282,94 +283,97 @@ public class MediaManagerImpl implements MediaManager {
 		// TODO Auto-generated method stub
 		List<Movie> result = new ArrayList<Movie>();
 
-		try{
-		if (field.equals(field.TITLE)) {
-			if (op.equals(Operator.CONTAINS)) {
-				result = movieList.stream().filter(m -> m.getTitle().contains(query)).collect(Collectors.toList());
-			} else if (op.equals(Operator.EQUALS)) {
-				result = movieList.stream().filter(m -> m.getTitle().equals(query)).collect(Collectors.toList());
-			} else if (op.equals(Operator.LESS_THAN)) {
-				result = movieList.stream().filter(m -> m.getTitle().compareTo(query) < 0).collect(Collectors.toList());
-			} else if (op.equals(Operator.GREATER_THAN)) {
-				result = movieList.stream().filter(m -> m.getTitle().compareTo(query) > 0).collect(Collectors.toList());
+		try {
+			if (field.equals(Field.TITLE)) {
+				if (op.equals(Operator.CONTAINS)) {
+					result = movieList.stream().filter(m -> m.getTitle().contains(query)).collect(Collectors.toList());
+				} else if (op.equals(Operator.EQUALS)) {
+					result = movieList.stream().filter(m -> m.getTitle().equals(query)).collect(Collectors.toList());
+				} else if (op.equals(Operator.LESS_THAN)) {
+					result = movieList.stream().filter(m -> m.getTitle().compareTo(query) < 0)
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.GREATER_THAN)) {
+					result = movieList.stream().filter(m -> m.getTitle().compareTo(query) > 0)
+							.collect(Collectors.toList());
 
-			}
-		} else if (field.equals(field.DESCRIPTION)) {
-			if (op.equals(Operator.CONTAINS)) {
-				result = movieList.stream().filter(m -> m.getDescription().contains(query))
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.EQUALS)) {
-				result = movieList.stream().filter(m -> m.getDescription().equals(query)).collect(Collectors.toList());
-			} else if (op.equals(Operator.LESS_THAN)) {
-				result = movieList.stream().filter(m -> m.getDescription().compareTo(query) < 0)
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.GREATER_THAN)) {
-				result = movieList.stream().filter(m -> m.getDescription().compareTo(query) > 0)
-						.collect(Collectors.toList());
+				}
+			} else if (field.equals(Field.DESCRIPTION)) {
+				if (op.equals(Operator.CONTAINS)) {
+					result = movieList.stream().filter(m -> m.getDescription().contains(query))
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.EQUALS)) {
+					result = movieList.stream().filter(m -> m.getDescription().equals(query))
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.LESS_THAN)) {
+					result = movieList.stream().filter(m -> m.getDescription().compareTo(query) < 0)
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.GREATER_THAN)) {
+					result = movieList.stream().filter(m -> m.getDescription().compareTo(query) > 0)
+							.collect(Collectors.toList());
 
-			}
-		} else if (field.equals(field.RATING)) {
-			if (op.equals(Operator.CONTAINS)) {
-				result = movieList.stream().filter(m -> m.getRating().toString().contains(query))
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.EQUALS)) {
-				result = movieList.stream().filter(m -> m.getRating().toString().equals(query))
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.LESS_THAN)) {
-				result = movieList.stream().filter(m -> m.getRating().toString().compareTo(query) < 0)
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.GREATER_THAN)) {
-				result = movieList.stream().filter(m -> m.getRating().toString().compareTo(query) > 0)
-						.collect(Collectors.toList());
-			}
-		} else if (field.equals(field.MEDIA)) {
-			if (op.equals(Operator.CONTAINS)) {
-				result = movieList.stream().filter(m -> m.getMedia().toString().contains(query))
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.EQUALS)) {
-				result = movieList.stream().filter(m -> m.getMedia().toString().equals(query))
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.LESS_THAN)) {
-				result = movieList.stream().filter(m -> m.getMedia().toString().compareTo(query) < 0)
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.GREATER_THAN)) {
-				result = movieList.stream().filter(m -> m.getMedia().toString().compareTo(query) > 0)
-						.collect(Collectors.toList());
-			}
-		} else if (field.equals(field.YEAR)) {
-			if (op.equals(Operator.CONTAINS)) {
-				result = movieList.stream().filter(m -> String.valueOf(m.getYear()).contains(query))
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.EQUALS)) {
-				result = movieList.stream().filter(m -> m.getYear() == Short.valueOf(query))
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.LESS_THAN)) {
-				result = movieList.stream().filter(m -> m.getYear() < Short.valueOf(query))
-						.collect(Collectors.toList());
+				}
+			} else if (field.equals(Field.RATING)) {
+				if (op.equals(Operator.CONTAINS)) {
+					result = movieList.stream().filter(m -> m.getRating().toString().contains(query))
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.EQUALS)) {
+					result = movieList.stream().filter(m -> m.getRating().toString().equals(query))
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.LESS_THAN)) {
+					result = movieList.stream().filter(m -> m.getRating().toString().compareTo(query) < 0)
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.GREATER_THAN)) {
+					result = movieList.stream().filter(m -> m.getRating().toString().compareTo(query) > 0)
+							.collect(Collectors.toList());
+				}
+			} else if (field.equals(Field.MEDIA)) {
+				if (op.equals(Operator.CONTAINS)) {
+					result = movieList.stream().filter(m -> m.getMedia().toString().contains(query))
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.EQUALS)) {
+					result = movieList.stream().filter(m -> m.getMedia().toString().equals(query))
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.LESS_THAN)) {
+					result = movieList.stream().filter(m -> m.getMedia().toString().compareTo(query) < 0)
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.GREATER_THAN)) {
+					result = movieList.stream().filter(m -> m.getMedia().toString().compareTo(query) > 0)
+							.collect(Collectors.toList());
+				}
+			} else if (field.equals(Field.YEAR)) {
+				if (op.equals(Operator.CONTAINS)) {
+					result = movieList.stream().filter(m -> String.valueOf(m.getYear()).contains(query))
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.EQUALS)) {
+					result = movieList.stream().filter(m -> m.getYear() == Short.valueOf(query))
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.LESS_THAN)) {
+					result = movieList.stream().filter(m -> m.getYear() < Short.valueOf(query))
+							.collect(Collectors.toList());
 
-			} else if (op.equals(Operator.GREATER_THAN)) {
-				result = movieList.stream().filter(m -> m.getYear() > Short.valueOf(query))
-						.collect(Collectors.toList());
+				} else if (op.equals(Operator.GREATER_THAN)) {
+					result = movieList.stream().filter(m -> m.getYear() > Short.valueOf(query))
+							.collect(Collectors.toList());
+				}
+			} else if (field.equals(Field.ACTORS)) {
+				if (op.equals(Operator.CONTAINS)) {
+					result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).contains(query))
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.EQUALS)) {
+					result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).equals(query))
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.LESS_THAN)) {
+					result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).compareTo(query) < 0)
+							.collect(Collectors.toList());
+				} else if (op.equals(Operator.GREATER_THAN)) {
+					result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).compareTo(query) > 0)
+							.collect(Collectors.toList());
+				}
 			}
-		} else if (field.equals(field.ACTORS)) {
-			if (op.equals(Operator.CONTAINS)) {
-				result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).contains(query))
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.EQUALS)) {
-				result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).equals(query))
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.LESS_THAN)) {
-				result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).compareTo(query) < 0)
-						.collect(Collectors.toList());
-			} else if (op.equals(Operator.GREATER_THAN)) {
-				result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).compareTo(query) > 0)
-						.collect(Collectors.toList());
-			}
+		} catch (NumberFormatException e) {
+			System.out.println("error: " + e.getMessage() + " wont convert to number");
 		}
-		}catch(NumberFormatException e){
-			System.out.println("error: "+e.getMessage()+" wont convert to number");
-		}
-		//System.out.println("here "+field);
+		// System.out.println("here "+field);
 		return result;
 
 	}
