@@ -1,6 +1,9 @@
 package com.comcast.video.media;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -69,6 +72,40 @@ public class MediaManagerImpl implements MediaManager {
 	 */
 	public void addMovies(File file) throws MediaException {
 		// TODO Auto-generated method stub
+		try{
+		FileReader fr =  new FileReader(file);
+		
+		BufferedReader br  = new BufferedReader(fr);
+
+		String s = null;
+
+		while ((s = br.readLine()) != null) {
+		    // Do whatever u want to do with the content of the file,eg print it on console using SysOut...etc
+			System.out.println("sss: "+s);
+			String[] temp = s.split("\\|");
+			String title = temp[0].trim();
+			String description = temp[1].trim();
+			String[] actors = temp[2].split(",");
+			String year = temp[3].trim();
+			String rating = temp[4].trim();
+			String mediaType = temp[5].trim();
+
+			MovieImpl movieImpl = new MovieImpl(title, description, actors, Short.parseShort(year),
+					Utility.getRating(rating), Utility.getMediaType(mediaType));
+
+			movieList.add(movieImpl);
+			
+			
+		}
+		
+		
+		}catch(FileNotFoundException e){
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 	}
 

@@ -13,30 +13,31 @@ package com.comcast.video.movie;
 import com.comcast.video.media.MediaManager;
 
 /**
- * An enumeration for each field within a {@link Movie} that can be used by a {@link MediaManager}
- * to filter or sort.
+ * An enumeration for each field within a {@link Movie} that can be used by a
+ * {@link MediaManager} to filter or sort.
  *
  */
 public enum Field {
 
 	/** @see Movie#getTitle() */
-    TITLE,
-    
-    /** @see Movie#getDescription()*/
-    DESCRIPTION, 
-    
-    /** @see Movie#getActors() */
-    ACTORS, 
-    
-    /** @see Movie#getYear() */
-    YEAR, 
-    
-    /** @see Movie#getRating() */
-    RATING, 
-    
-    /** @see Movie#getMedia() */
-    MEDIA;
-	
-	Field(){}
-	
+	TITLE,
+
+	/** @see Movie#getDescription() */
+	DESCRIPTION,
+
+	/** @see Movie#getActors() */
+	ACTORS,
+
+	/** @see Movie#getYear() */
+	YEAR,
+
+	/** @see Movie#getRating() */
+	RATING,
+
+	/** @see Movie#getMedia() */
+	MEDIA;
+
+	Field() {
+	}
+
 }

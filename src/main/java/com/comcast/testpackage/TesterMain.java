@@ -1,5 +1,6 @@
 package com.comcast.testpackage;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -75,6 +76,16 @@ public class TesterMain {
 
 			System.out.println("-----------------");
 			for (Movie m : filteredMovie8) {
+
+				System.out.println(m.toString());
+			}
+			
+			
+			File f = new File("/Users/xzheng/Desktop/temp/movie-collection/src/main/java/com/comcast/testpackage/data2.txt");
+			
+			managerImpl.addMovies(f);
+			System.out.println("-----------------");
+			for (Movie m : managerImpl.getMovies()) {
 
 				System.out.println(m.toString());
 			}
