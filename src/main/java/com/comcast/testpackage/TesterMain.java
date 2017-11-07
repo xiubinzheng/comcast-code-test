@@ -61,7 +61,7 @@ public class TesterMain {
 				System.out.println("Movie: " + m.toString());
 			}
 
-			List<Movie> filteredMovie = managerImpl.filterMovies(Field.YEAR, Operator.EQUALS, "1980");
+			List<Movie> filteredMovie = managerImpl.filterMovies(Field.YEAR, Operator.EQUALS, "ninja");
 			List<Movie> filteredMovie2 = managerImpl.filterMovies(Field.YEAR, Operator.LESS_THAN, "1999");
 			List<Movie> filteredMovie3 = managerImpl.filterMovies(Field.YEAR, Operator.GREATER_THAN, "1980");
 			List<Movie> filteredMovie4 = managerImpl.filterMovies(Field.YEAR, Operator.CONTAINS, "1976");
@@ -74,12 +74,12 @@ public class TesterMain {
 			List<Movie> filteredMovie11 = managerImpl.filterMovies(Field.YEAR, Operator.GREATER_THAN, "1980");
 			List<Movie> filteredMovie12 = managerImpl.filterMovies(Field.YEAR, Operator.CONTAINS, "1976");
 
-			System.out.println("-----------------");
-			for (Movie m : filteredMovie8) {
+			System.out.println("filterMovie start-----------------");
+			for (Movie m : filteredMovie) {
 
-				System.out.println(m.toString());
+				System.out.println("filterMovie: "+m.toString());
 			}
-			
+			System.out.println("filterMovie end-----------------");
 			
 			File f = new File("/Users/xzheng/Desktop/temp/movie-collection/src/main/java/com/comcast/testpackage/data2.txt");
 			

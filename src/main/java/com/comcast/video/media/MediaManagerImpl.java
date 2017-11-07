@@ -282,6 +282,7 @@ public class MediaManagerImpl implements MediaManager {
 		// TODO Auto-generated method stub
 		List<Movie> result = new ArrayList<Movie>();
 
+		try{
 		if (field.equals(field.TITLE)) {
 			if (op.equals(Operator.CONTAINS)) {
 				result = movieList.stream().filter(m -> m.getTitle().contains(query)).collect(Collectors.toList());
@@ -365,7 +366,10 @@ public class MediaManagerImpl implements MediaManager {
 						.collect(Collectors.toList());
 			}
 		}
-
+		}catch(NumberFormatException e){
+			System.out.println("error: "+e.getMessage()+" wont convert to number");
+		}
+		//System.out.println("here "+field);
 		return result;
 
 	}
