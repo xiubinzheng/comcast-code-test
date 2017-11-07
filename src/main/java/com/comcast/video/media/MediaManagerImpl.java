@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.comcast.util.MovieComparator;
 import com.comcast.util.Utility;
 import com.comcast.video.movie.Field;
 import com.comcast.video.movie.Movie;
@@ -190,8 +191,8 @@ public class MediaManagerImpl implements MediaManager {
 	 */
 	public List<Movie> sortMovies(Field field, boolean ascending) {
 		// TODO Auto-generated method stub
-		List<Movie> result = new ArrayList<Movie>();
-		Collections.sort(movieList,Collections.reverseOrder());
+		
+		Collections.sort(movieList,new MovieComparator(field));
 
 		return movieList;
 	}

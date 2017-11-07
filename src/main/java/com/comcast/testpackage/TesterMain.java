@@ -60,8 +60,6 @@ public class TesterMain {
 			managerImpl.sortMovies(Field.TITLE, true);
 			
 			
-			
-			
 			for (Movie m : managerImpl.getMovies()) {
 				System.out.println("Movie: " + m.toString());
 			}
