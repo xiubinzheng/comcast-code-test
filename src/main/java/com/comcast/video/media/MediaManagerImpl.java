@@ -310,7 +310,6 @@ public class MediaManagerImpl implements MediaManager {
 				} else if (op.equals(Operator.GREATER_THAN)) {
 					result = movieList.stream().filter(m -> m.getDescription().compareTo(query) > 0)
 							.collect(Collectors.toList());
-
 				}
 			} else if (field.equals(Field.RATING)) {
 				if (op.equals(Operator.CONTAINS)) {

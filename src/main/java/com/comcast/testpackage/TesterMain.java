@@ -24,7 +24,7 @@ public class TesterMain {
 		try {
 			input = new FileInputStream(
 					"/Users/xzheng/Desktop/temp/movie-collection/src/main/java/com/comcast/testpackage/data.txt");
-			MediaManagerImpl managerImpl = new MediaManagerImpl();
+			MediaManagerImpl mediaManagerImpl = new MediaManagerImpl();
 
 			MovieImpl RockyII = new MovieImpl("Rocky II", "Underdog boxer 2", new String[] { "Slyster", "Mickey" },
 					(short) 1978, Rating.R, MediaType.VHS);
@@ -39,41 +39,41 @@ public class TesterMain {
 					Rating.R, MediaType.DVD);
 
 			List<Movie> myMovieList = new ArrayList<Movie>(Arrays.asList(TheGoonies, ForrestGump, AmericanPsycho));
-			managerImpl.addMovies(myMovieList);
+			mediaManagerImpl.addMovies(myMovieList);
 
 			
-			managerImpl.addMovies(RockyII, RockyIII);
-			managerImpl.addMovies(input);
+			mediaManagerImpl.addMovies(RockyII, RockyIII);
+			mediaManagerImpl.addMovies(input);
 
-			System.out.println("size: " + managerImpl.searchMovies("Rock").size());
+			System.out.println("size: " + mediaManagerImpl.searchMovies("Rock").size());
 
-			for (Movie m : managerImpl.searchMovies("Rock")) {
+			for (Movie m : mediaManagerImpl.searchMovies("Rock")) {
 				System.out.println("mm: " + m.toString());
 			}
 
-			for (Movie m : managerImpl.getMovies()) {
+			for (Movie m : mediaManagerImpl.getMovies()) {
 				System.out.println("Movie: " + m.toString());
 			}
 
 			System.out.println("-----------------");
-			managerImpl.sortMovies(Field.TITLE, false);
+			mediaManagerImpl.sortMovies(Field.TITLE, false);
 
-			for (Movie m : managerImpl.getMovies()) {
+			for (Movie m : mediaManagerImpl.getMovies()) {
 				System.out.println("Movie: " + m.toString());
 			}
 
-			List<Movie> filteredMovie = managerImpl.filterMovies(Field.YEAR, Operator.EQUALS, "ninja");
-			List<Movie> filteredMovie2 = managerImpl.filterMovies(Field.YEAR, Operator.LESS_THAN, "1999");
-			List<Movie> filteredMovie3 = managerImpl.filterMovies(Field.YEAR, Operator.GREATER_THAN, "1980");
-			List<Movie> filteredMovie4 = managerImpl.filterMovies(Field.YEAR, Operator.CONTAINS, "1976");
-			List<Movie> filteredMovie5 = managerImpl.filterMovies(Field.TITLE, Operator.EQUALS, "Rocky");
-			List<Movie> filteredMovie6 = managerImpl.filterMovies(Field.TITLE, Operator.LESS_THAN, "Rock");
+			List<Movie> filteredMovie = mediaManagerImpl.filterMovies(Field.YEAR, Operator.EQUALS, "ninja");
+			List<Movie> filteredMovie2 = mediaManagerImpl.filterMovies(Field.YEAR, Operator.LESS_THAN, "1999");
+			List<Movie> filteredMovie3 = mediaManagerImpl.filterMovies(Field.YEAR, Operator.GREATER_THAN, "1980");
+			List<Movie> filteredMovie4 = mediaManagerImpl.filterMovies(Field.YEAR, Operator.CONTAINS, "1976");
+			List<Movie> filteredMovie5 = mediaManagerImpl.filterMovies(Field.TITLE, Operator.EQUALS, "Rocky");
+			List<Movie> filteredMovie6 = mediaManagerImpl.filterMovies(Field.TITLE, Operator.LESS_THAN, "Rock");
 			//List<Movie> filteredMovie7 = managerImpl.filterMovies(Field.YEAR, Operator.GREATER_THAN, "Rock");
-			List<Movie> filteredMovie8 = managerImpl.filterMovies(Field.DESCRIPTION, Operator.CONTAINS, "kids");
-			List<Movie> filteredMovie9 = managerImpl.filterMovies(Field.DESCRIPTION, Operator.EQUALS, "Micky dies");
-			List<Movie> filteredMovie10 = managerImpl.filterMovies(Field.YEAR, Operator.LESS_THAN, "1999");
-			List<Movie> filteredMovie11 = managerImpl.filterMovies(Field.YEAR, Operator.GREATER_THAN, "1980");
-			List<Movie> filteredMovie12 = managerImpl.filterMovies(Field.YEAR, Operator.CONTAINS, "1976");
+			List<Movie> filteredMovie8 = mediaManagerImpl.filterMovies(Field.DESCRIPTION, Operator.CONTAINS, "kids");
+			List<Movie> filteredMovie9 = mediaManagerImpl.filterMovies(Field.DESCRIPTION, Operator.EQUALS, "Micky dies");
+			List<Movie> filteredMovie10 = mediaManagerImpl.filterMovies(Field.YEAR, Operator.LESS_THAN, "1999");
+			List<Movie> filteredMovie11 = mediaManagerImpl.filterMovies(Field.YEAR, Operator.GREATER_THAN, "1980");
+			List<Movie> filteredMovie12 = mediaManagerImpl.filterMovies(Field.YEAR, Operator.CONTAINS, "1976");
 
 			System.out.println("filterMovie start-----------------");
 			for (Movie m : filteredMovie) {
@@ -84,9 +84,9 @@ public class TesterMain {
 			
 			File f = new File("/Users/xzheng/Desktop/temp/movie-collection/src/main/java/com/comcast/testpackage/data2.txt");
 			
-			managerImpl.addMovies(f);
+			mediaManagerImpl.addMovies(f);
 			System.out.println("-----------------");
-			for (Movie m : managerImpl.getMovies()) {
+			for (Movie m : mediaManagerImpl.getMovies()) {
 
 				System.out.println(m.toString());
 			}
