@@ -37,7 +37,4 @@ public enum Field {
 	/** @see Movie#getMedia() */
 	MEDIA;
 
-	Field() {
-	}
-
 }
