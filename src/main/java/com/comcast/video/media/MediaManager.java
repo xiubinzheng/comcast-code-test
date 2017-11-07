@@ -52,7 +52,8 @@ public interface MediaManager {
     void addMovies( File file ) throws MediaException;
 
     /**
-     * Parse the <code>file</code> adding each movie to the internal database. The requirements for
+     * Parse the <code>file</code> adding each movie to the internal database. 
+     * The requirements for
      * the format are as follows:
      *
      * <pre>
@@ -79,6 +80,7 @@ public interface MediaManager {
      *
      * <pre>
      * Gone with the Wind | American classic | Clark Gable, Vivien Leigh, Thomas Mitchell | 1939 | G | VHS
+     * 
      * Antitrust | It's about Microsoft | Ryan Phillippe, Tim Robbins, Rachael Leigh Cook | 2001 | PG-13 | DVD
      * </pre>
      *

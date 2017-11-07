@@ -16,5 +16,5 @@ package com.comcast.video.movie;
  */
 public enum Rating {
 
-    G, PG, PG_13, R, NC_17, NR
+    G, PG, PG_13, R, NC_17, NR,UNRATED
 }

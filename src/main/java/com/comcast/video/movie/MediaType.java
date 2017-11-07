@@ -16,5 +16,5 @@ package com.comcast.video.movie;
  */
 public enum MediaType {
 
-    VHS, LAZERDISK, DVD, VCD, HD_DVD, BLURAY
+    VHS, LAZERDISK, DVD, VCD, HD_DVD, BLURAY, NONE
 }

@@ -18,7 +18,8 @@ package com.comcast.video.movie;
 public interface Movie {
 
     /**
-     * Get the title of the movie. No distinction or clarification is required on how to handle
+     * Get the title of the movie. No distinction or 
+     * clarification is required on how to handle
      * subtitles.
      *
      * @return  the title of the movie
@@ -33,7 +34,9 @@ public interface Movie {
     String getDescription();
 
     /**
-     * Get a list of actors in the movie. This may only include an abbreviated list of the cast.
+     * Get a list of actors in the movie. 
+     * This may only include an abbreviated 
+     * list of the cast.
      *
      * @return  the list of actors
      */
@@ -54,8 +57,11 @@ public interface Movie {
     Rating getRating();
 
     /**
-     * Get the media type for this movie. As this movie represents someone's personally owned asset,
-     * this pertains to the copy they own, not the format(s) in which the movie was released.
+     * Get the media type for this movie. 
+     * As this movie represents someone's personally owned asset,
+     * this pertains to the copy they own, 
+     * not the format(s) 
+     * in which the movie was released.
      *
      * @return  the media type
      */

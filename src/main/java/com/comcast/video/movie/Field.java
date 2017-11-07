@@ -35,5 +35,8 @@ public enum Field {
     RATING, 
     
     /** @see Movie#getMedia() */
-    MEDIA
+    MEDIA;
+	
+	Field(){}
+	
 }
