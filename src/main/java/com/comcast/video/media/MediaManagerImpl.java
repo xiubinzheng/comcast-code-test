@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.comcast.util.MovieComparator;
 import com.comcast.util.Utility;
@@ -136,12 +138,12 @@ public class MediaManagerImpl implements MediaManager {
 			String[] newline = sb.toString().split("\\r?\\n");
 			for (String str : newline) {
 				String[] temp = str.split("\\|");
-				String title = temp[0];
-				String description = temp[1];
+				String title = temp[0].trim();
+				String description = temp[1].trim();
 				String[] actors = temp[2].split(",");
 				String year = temp[3].trim();
 				String rating = temp[4].trim();
-				String mediaType = temp[5];
+				String mediaType = temp[5].trim();
 
 				System.out.println("year: " + year);
 				MovieImpl movieImpl = new MovieImpl(title, description, actors, Short.parseShort(year),
@@ -191,9 +193,14 @@ public class MediaManagerImpl implements MediaManager {
 	 */
 	public List<Movie> sortMovies(Field field, boolean ascending) {
 		// TODO Auto-generated method stub
-		
-		Collections.sort(movieList,new MovieComparator(field));
 
+		// Collections.sort(movieList,Collections.reverseOrder(new
+		// MovieComparator(field)));
+		if (ascending) {
+			Collections.sort(movieList, new MovieComparator(field));
+		} else {
+			Collections.sort(movieList, Collections.reverseOrder(new MovieComparator(field)));
+		}
 		return movieList;
 	}
 
@@ -238,26 +245,91 @@ public class MediaManagerImpl implements MediaManager {
 		// TODO Auto-generated method stub
 		List<Movie> result = new ArrayList<Movie>();
 
-		switch (field) {
-		case TITLE:
+		if (field.equals(field.TITLE)) {
+			if (op.equals(Operator.CONTAINS)) {
+				result = movieList.stream().filter(m -> m.getTitle().contains(query)).collect(Collectors.toList());
+			} else if (op.equals(Operator.EQUALS)) {
+				result = movieList.stream().filter(m -> m.getTitle().equals(query)).collect(Collectors.toList());
+			} else if (op.equals(Operator.LESS_THAN)) {
+				result = movieList.stream().filter(m -> m.getTitle().compareTo(query) < 0).collect(Collectors.toList());
+			} else if (op.equals(Operator.GREATER_THAN)) {
+				result = movieList.stream().filter(m -> m.getTitle().compareTo(query) > 0).collect(Collectors.toList());
 
-			break;
+			}
+		} else if (field.equals(field.DESCRIPTION)) {
+			if (op.equals(Operator.CONTAINS)) {
+				result = movieList.stream().filter(m -> m.getDescription().contains(query))
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.EQUALS)) {
+				result = movieList.stream().filter(m -> m.getDescription().equals(query)).collect(Collectors.toList());
+			} else if (op.equals(Operator.LESS_THAN)) {
+				result = movieList.stream().filter(m -> m.getDescription().compareTo(query) < 0)
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.GREATER_THAN)) {
+				result = movieList.stream().filter(m -> m.getDescription().compareTo(query) > 0)
+						.collect(Collectors.toList());
 
-		case DESCRIPTION:
-			break;
+			}
+		} else if (field.equals(field.RATING)) {
+			if (op.equals(Operator.CONTAINS)) {
+				result = movieList.stream().filter(m -> m.getRating().toString().contains(query))
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.EQUALS)) {
+				result = movieList.stream().filter(m -> m.getRating().toString().equals(query))
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.LESS_THAN)) {
+				result = movieList.stream().filter(m -> m.getRating().toString().compareTo(query) < 0)
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.GREATER_THAN)) {
+				result = movieList.stream().filter(m -> m.getRating().toString().compareTo(query) > 0)
+						.collect(Collectors.toList());
+			}
+		} else if (field.equals(field.MEDIA)) {
+			if (op.equals(Operator.CONTAINS)) {
+				result = movieList.stream().filter(m -> m.getMedia().toString().contains(query))
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.EQUALS)) {
+				result = movieList.stream().filter(m -> m.getMedia().toString().equals(query))
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.LESS_THAN)) {
+				result = movieList.stream().filter(m -> m.getMedia().toString().compareTo(query) < 0)
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.GREATER_THAN)) {
+				result = movieList.stream().filter(m -> m.getMedia().toString().compareTo(query) > 0)
+						.collect(Collectors.toList());
+			}
+		} else if (field.equals(field.YEAR)) {
+			if (op.equals(Operator.CONTAINS)) {
+				result = movieList.stream().filter(m -> String.valueOf(m.getYear()).contains(query))
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.EQUALS)) {
+				result = movieList.stream().filter(m -> m.getYear() == Short.valueOf(query))
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.LESS_THAN)) {
+				result = movieList.stream().filter(m -> m.getYear() < Short.valueOf(query))
+						.collect(Collectors.toList());
 
-		case YEAR:
-			break;
-
-		case RATING:
-			break;
-
-		case MEDIA:
-			break;
-
+			} else if (op.equals(Operator.GREATER_THAN)) {
+				result = movieList.stream().filter(m -> m.getYear() > Short.valueOf(query))
+						.collect(Collectors.toList());
+			}
+		} else if (field.equals(field.ACTORS)) {
+			if (op.equals(Operator.CONTAINS)) {
+				result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).contains(query))
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.EQUALS)) {
+				result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).equals(query))
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.LESS_THAN)) {
+				result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).compareTo(query) < 0)
+						.collect(Collectors.toList());
+			} else if (op.equals(Operator.GREATER_THAN)) {
+				result = movieList.stream().filter(m -> Arrays.toString(m.getActors()).compareTo(query) > 0)
+						.collect(Collectors.toList());
+			}
 		}
 
-		return null;
+		return result;
 
 	}
 

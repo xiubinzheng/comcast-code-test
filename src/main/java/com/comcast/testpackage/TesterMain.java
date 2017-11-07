@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.comcast.video.media.MediaException;
 import com.comcast.video.media.MediaManagerImpl;
+import com.comcast.video.media.Operator;
 import com.comcast.video.movie.Field;
 import com.comcast.video.movie.MediaType;
 import com.comcast.video.movie.Movie;
@@ -41,28 +42,43 @@ public class TesterMain {
 
 			managerImpl.addMovies(RockyII, RockyIII);
 			managerImpl.addMovies(input);
-			
-			
-			
-			System.out.println("size: "+managerImpl.searchMovies("Rock").size());
-			
-			
-			for(Movie m:managerImpl.searchMovies("Rock")){
-				System.out.println("mm: "+m.toString());
+
+			System.out.println("size: " + managerImpl.searchMovies("Rock").size());
+
+			for (Movie m : managerImpl.searchMovies("Rock")) {
+				System.out.println("mm: " + m.toString());
 			}
-			
 
 			for (Movie m : managerImpl.getMovies()) {
 				System.out.println("Movie: " + m.toString());
 			}
-			
+
 			System.out.println("-----------------");
-			managerImpl.sortMovies(Field.TITLE, true);
-			
-			
+			managerImpl.sortMovies(Field.TITLE, false);
+
 			for (Movie m : managerImpl.getMovies()) {
 				System.out.println("Movie: " + m.toString());
 			}
+
+			List<Movie> filteredMovie = managerImpl.filterMovies(Field.YEAR, Operator.EQUALS, "1980");
+			List<Movie> filteredMovie2 = managerImpl.filterMovies(Field.YEAR, Operator.LESS_THAN, "1999");
+			List<Movie> filteredMovie3 = managerImpl.filterMovies(Field.YEAR, Operator.GREATER_THAN, "1980");
+			List<Movie> filteredMovie4 = managerImpl.filterMovies(Field.YEAR, Operator.CONTAINS, "1976");
+			List<Movie> filteredMovie5 = managerImpl.filterMovies(Field.TITLE, Operator.EQUALS, "Rocky");
+			List<Movie> filteredMovie6 = managerImpl.filterMovies(Field.TITLE, Operator.LESS_THAN, "Rock");
+			//List<Movie> filteredMovie7 = managerImpl.filterMovies(Field.YEAR, Operator.GREATER_THAN, "Rock");
+			List<Movie> filteredMovie8 = managerImpl.filterMovies(Field.DESCRIPTION, Operator.CONTAINS, "kids");
+			List<Movie> filteredMovie9 = managerImpl.filterMovies(Field.DESCRIPTION, Operator.EQUALS, "Micky dies");
+			List<Movie> filteredMovie10 = managerImpl.filterMovies(Field.YEAR, Operator.LESS_THAN, "1999");
+			List<Movie> filteredMovie11 = managerImpl.filterMovies(Field.YEAR, Operator.GREATER_THAN, "1980");
+			List<Movie> filteredMovie12 = managerImpl.filterMovies(Field.YEAR, Operator.CONTAINS, "1976");
+
+			System.out.println("-----------------");
+			for (Movie m : filteredMovie8) {
+
+				System.out.println(m.toString());
+			}
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
